@@ -28,6 +28,8 @@ public class app {
                 regit();
             } else if (cmd.equals("목록")) {
                 list();
+            } else if (cmd.startsWith("삭제")) {
+                del(cmd);
             }
         }
     }
@@ -50,6 +52,28 @@ public class app {
         for (int i = sayings.size() - 1; i >= 0; i--) {
             Saying saying = sayings.get(i);
             System.out.printf("%d / %s / %s\n", saying.count, saying.content, saying.name);
+        }
+    }
+    void del(String cmd) {
+        String[] cmdBits = cmd.split("\\?",2);
+        String idParam = cmdBits[1];
+        String[] idParamBits = idParam.split("&");
+        int id = 0;
+        for (int i = 0; i < idParamBits.length; i++){
+            String bitsParam = idParamBits[i];
+            String[] bitsParamBits = bitsParam.split("=",2);
+            String nameBitsParamBits = bitsParamBits[0];
+            String valueBitsParamBits = bitsParamBits[1];
+
+            if (nameBitsParamBits.equals("id")){
+                id = Integer.parseInt(valueBitsParamBits);
+            }
+        }
+        try {
+            sayings.remove(id-1);
+            System.out.printf("%d번 명언이 삭제되었습니다.\n",id);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
         }
     }
 }
