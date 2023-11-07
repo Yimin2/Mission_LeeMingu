@@ -26,6 +26,8 @@ public class app {
                 break;
             } else if (cmd.equals("등록")) {
                 regit();
+            } else if (cmd.equals("목록")) {
+                list();
             }
         }
     }
@@ -40,5 +42,14 @@ public class app {
         System.out.printf(content + "/" + name + "\n");
         count++;
         sayings.add(saying);
+    }
+    void list() {
+        System.out.println("번호 / 작가 / 명언");
+        System.out.println("------------------");
+        System.out.println();
+        for (int i = sayings.size() - 1; i >= 0; i--) {
+            Saying saying = sayings.get(i);
+            System.out.printf("%d / %s / %s\n", saying.count, saying.content, saying.name);
+        }
     }
 }
