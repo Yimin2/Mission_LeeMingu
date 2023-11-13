@@ -1,6 +1,7 @@
 package com.ll;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +12,14 @@ public class Rq {
     Map<String, String> paramsMap;
 
     Rq(String cmd) {
-        paramNames = new ArrayList<>();
-        paramValues = new ArrayList<>();
+        paramsMap = new HashMap<>();
         this.cmd = cmd;
         String[] cmdBits = cmd.split("//?", 2);
-        action = cmdBits[0];
-        queryString = cmdBits[1];
+        action = cmdBits[0].trim();
+        if (cmdBits.legnth == 1) {
+            return;
+        }
+        queryString = cmdBits[1].trim();
         String[] queryStringBits = queryString.split("&");
         for (int i = 0; i < queryStringBits.length; i++) {
             String queryParamStr = queryStringBits[i];

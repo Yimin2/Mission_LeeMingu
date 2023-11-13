@@ -26,16 +26,21 @@ public class App {
 
             System.out.println("rq.getAction : " + Rq.getAction());
             System.out.println("rq.getParamAsInt : " + Rq.getParamAsInt("id", 0));
-            if (cmd.equals("종료")) {
-                break;
-            } else if (cmd.equals("등록")) {
-                regit();
-            } else if (cmd.equals("목록")) {
-                list();
-            } else if (cmd.startsWith("삭제")) {
-                actionRemove(cmd);
-            } else if (cmd.startsWith("수정")) {
-                actionModify(cmd);
+            switch (rq.getAction()) {
+                case "종료":
+                    return;
+                case "등록":
+                    regit();
+                    break;
+                case "목록":
+                    list();
+                    break;
+                case "삭제":
+                    actionRemove(rq);
+                    break;
+                case "수정":
+                    actionModify(rq);
+                    break;
             }
         }
     }
@@ -62,8 +67,8 @@ public class App {
         }
     }
 
-    void actionRemove(String cmd) {
-        int id = getParamAsInt(cmd, "id", 0);
+    void actionRemove(Rq rq) {
+        int id = rq.getParamAsInt("id", 0);
         if (id == 0) {
             System.out.println("id를 정확히 입력해주세요.");
             return; // 함수를 끝낸다.
@@ -71,8 +76,8 @@ public class App {
         System.out.printf("%d번 명언을 삭제합니다.\n", id);
     }
 
-    void actionModify(String cmd) {
-        int id = getParamAsInt(cmd, "id", 0);
+    void actionModify(Rq rq) {
+        int id = rq.getParamAsInt("id", 0);
         if (id == 0) {
             System.out.println("id를 정확히 입력해주세요.");
             return; // 함수를 끝낸다.
