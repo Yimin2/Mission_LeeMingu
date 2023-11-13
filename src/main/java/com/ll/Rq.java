@@ -16,7 +16,7 @@ public class Rq {
         this.cmd = cmd;
         String[] cmdBits = cmd.split("//?", 2);
         action = cmdBits[0].trim();
-        if (cmdBits.legnth == 1) {
+        if (cmdBits.length == 1) {
             return;
         }
         queryString = cmdBits[1].trim();
@@ -35,7 +35,6 @@ public class Rq {
     String getAction() {
         return action;
     }
-
     public int getParamAsInt(String paramName, int defaultValue) {
         String paramValue = paramsMap.get(paramName);
         if (paramValue != null) {

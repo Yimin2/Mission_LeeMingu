@@ -11,7 +11,7 @@ public class App {
     int count;
     List<Saying> sayings;
 
-    app() {
+    App() {
         scanner = new Scanner(System.in);
         sayings = new ArrayList<>();
         count = 1;
@@ -24,8 +24,8 @@ public class App {
             String cmd = scanner.nextLine();
             Rq rq = new Rq(cmd);
 
-            System.out.println("rq.getAction : " + Rq.getAction());
-            System.out.println("rq.getParamAsInt : " + Rq.getParamAsInt("id", 0));
+            System.out.println("rq.getAction : " + rq.getAction());
+            System.out.println("rq.getParamAsInt : " + rq.getParamAsInt("id", 0));
             switch (rq.getAction()) {
                 case "종료":
                     return;
