@@ -2,13 +2,13 @@ package com.ll;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Rq {
     String cmd;
     String action;
     String queryString;
-    List<String> paramNames;
-    List<String> paramValues;
+    Map<String, String> paramsMap;
 
     Rq(String cmd) {
         paramNames = new ArrayList<>();
@@ -23,10 +23,9 @@ public class Rq {
             String[] queryParamBits = queryParamStr.split("=", 2);
 
             String paramName = queryParamBits[0];
-            String parmaValue = queryParamBits[1];
+            String paramValue = queryParamBits[1];
 
-            paramNames.add(paramName);
-            paramValues.add(parmaValue);
+            paramsMap.put(paramName, paramValue);
         }
     }
 
@@ -35,14 +34,13 @@ public class Rq {
     }
 
     public int getParamAsInt(String paramName, int defaultValue) {
-        int index = paramNames.indexOf(paramName);
-        if (index == -1) return defaultvalue;
-        String paramValue = paramValues.get(index);
-
-        try {
-            return Integer.parseInt(paramValue);
-        } catch (NumberFormatException e) {
-            return defaultvalue;
+        String paramValue = paramsMap.get(paramName);
+        if (paramValue != null) {
+            try {
+                return Integer.parseInt(paramValue);
+            } catch (NumberFormatException e) {
+            }
         }
+        return defaultValue;
     }
 }
