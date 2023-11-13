@@ -22,6 +22,10 @@ public class App {
         while (true) {
             System.out.print("명령 : ");
             String cmd = scanner.nextLine();
+            Rq rq = new Rq(cmd);
+
+            System.out.println("rq.getAction : " + Rq.getAction());
+            System.out.println("rq.getParamAsInt : " + Rq.getParamAsInt("id", 0));
             if (cmd.equals("종료")) {
                 break;
             } else if (cmd.equals("등록")) {
@@ -29,9 +33,9 @@ public class App {
             } else if (cmd.equals("목록")) {
                 list();
             } else if (cmd.startsWith("삭제")) {
-                del(cmd);
+                actionRemove(cmd);
             } else if (cmd.startsWith("수정")) {
-                modify(cmd);
+                actionModify(cmd);
             }
         }
     }
@@ -58,67 +62,21 @@ public class App {
         }
     }
 
-    void del(String cmd) {
-        String[] cmdBits = cmd.split("\\?", 2);
-        String idParam = cmdBits[1];
-        String[] idParamBits = idParam.split("&");
-        int id = 0;
-        for (int i = 0; i < idParamBits.length; i++) {
-            String bitsParam = idParamBits[i];
-            String[] bitsParamBits = bitsParam.split("=", 2);
-            String nameBitsParamBits = bitsParamBits[0];
-            String valueBitsParamBits = bitsParamBits[1];
-
-            if (nameBitsParamBits.equals("id")) {
-                id = Integer.parseInt(valueBitsParamBits);
-            }
+    void actionRemove(String cmd) {
+        int id = getParamAsInt(cmd, "id", 0);
+        if (id == 0) {
+            System.out.println("id를 정확히 입력해주세요.");
+            return; // 함수를 끝낸다.
         }
-        try {
-            sayings.remove(id - 1);
-            System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
-        }
+        System.out.printf("%d번 명언을 삭제합니다.\n", id);
     }
 
-    void modify(String cmd) {
-        String[] cmdBits = cmd.split("\\?", 2);
-        String idParam = cmdBits[1];
-        String[] idParamBits = idParam.split("&");
-        int id = 0;
-
-        for (int i = 0; i < idParamBits.length; i++) {
-            String bitsParam = idParamBits[i];
-            String[] bitsParamBits = bitsParam.split("=", 2);
-            String nameBitsParamBits = bitsParamBits[0];
-            String valueBitsParamBits = bitsParamBits[1];
-
-            if (nameBitsParamBits.equals("id")) {
-                id = Integer.parseInt(valueBitsParamBits);
-            }
+    void actionModify(String cmd) {
+        int id = getParamAsInt(cmd, "id", 0);
+        if (id == 0) {
+            System.out.println("id를 정확히 입력해주세요.");
+            return; // 함수를 끝낸다.
         }
-
-        try {
-            if (id <= sayings.size() && id > 0) {
-                Saying saying = sayings.get(id - 1);
-
-                System.out.println("현재 명언 내용: " + saying.content);
-                System.out.println("현재 작가: " + saying.name);
-
-                System.out.print("새로운 명언 입력: ");
-                content = scanner.nextLine();
-                System.out.print("새로운 작가 입력: ");
-                name = scanner.nextLine();
-
-                saying.content = content;
-                saying.name = name;
-
-                System.out.println(id + "번 명언이 수정되었습니다.");
-            } else {
-                System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
-        }
+        System.out.printf("%d번 명언을 수정합니다.\n", id);
     }
 }
