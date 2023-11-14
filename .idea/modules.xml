@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Misson_LeeMingu.iml" filepath="$PROJECT_DIR$/Misson_LeeMingu.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Misson_LeeMingu.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Misson_LeeMingu.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Misson_LeeMingu.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Misson_LeeMingu.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Misson_LeeMingu.iml" filepath="$PROJECT_DIR$/.idea/modules/Misson_LeeMingu.iml" group="Misson_LeeMingu" />
     </modules>
   </component>
 </project>
