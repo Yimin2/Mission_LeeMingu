@@ -1,13 +1,13 @@
-package com.ll;
+package com.ll.domain;
 
 public class Saying {
-    String name;
-    String content;
-    int count;
+    public String name;
+    public String content;
+    public int id;
 
     Saying(String name, String content, int count) {
         this.name = name;
         this.content = content;
-        this.count = count;
+        this.id = count;
     }
 }

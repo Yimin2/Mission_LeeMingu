@@ -1,4 +1,4 @@
-package com.ll;
+package com.ll.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class Rq {
         }
     }
 
-    String getAction() {
+    public String getAction() {
         return action;
     }
     public int getParamAsInt(String paramName, int defaultValue) {
