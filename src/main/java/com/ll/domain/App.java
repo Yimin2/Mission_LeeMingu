@@ -85,7 +85,6 @@ public class App {
     private int getIndexOfSayingById(int id) {
         for (int i = 0; i < sayings.size(); i++) {
             Saying saying = sayings.get(i);
-
             if (saying.id == id) {
                 return i;
             }
